@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -13,7 +13,7 @@ app.use(cors());
 
 const users: Array<{ id: number; username: string; password: string }> = [];
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", (req: Request, res: Response) => {
   const { username, password } = req.body;
   console.log(users);
   console.log(req.body);
@@ -21,11 +21,6 @@ app.post("/api/login", (req, res) => {
   // You should check the user credentials against a database here
   // For this example, we'll just use a hardcoded user
   const user = users.find((user) => user.username === username);
-  //   const user = {
-  //     id: 1,
-  //     username: "john.doe",
-  //     password: "$2a$10$KjR4wIW8CrIv.eO3/3oKbe/ll/X1okQX9nMNzoBnEUnNjyC8wNpJG",
-  //   }; // password: password
 
   if (!user) {
     res.status(401).send("Invalid username or password");
@@ -45,7 +40,7 @@ app.post("/api/login", (req, res) => {
   });
 });
 
-app.post("/api/register", (req, res) => {
+app.post("/api/register", (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   // Check if the user already exists
