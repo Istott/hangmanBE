@@ -1,9 +1,19 @@
 import express, { NextFunction, Request, Response } from "express";
-import routes from "./routes";
+import cors from "cors";
+// import routes from "./routes";
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); //req.body
+app.use(cors());
+
+//ROUTES//
+
+app.use("/auth", require("./routes/jwtAuth"));
+
+app.listen(4000, () => {
+  console.log("application listening at http://localhost:4000");
+});
 
 // app.use(express.urlencoded({extended: true}));
 
@@ -70,16 +80,16 @@ app.use(express.json());
 //   }
 // );
 
-const middleware =
-  ({ name }: { name: string }) =>
-  (req: Request, res: Response, next: NextFunction) => {
-    req.body.name = name;
-    next();
-  };
+// const middleware =
+//   ({ name }: { name: string }) =>
+//   (req: Request, res: Response, next: NextFunction) => {
+//     req.body.name = name;
+//     next();
+//   };
 
-app.use(middleware({ name: "IsaacIsAwesome" }));
+// app.use(middleware({ name: "IsaacIsAwesome" }));
 
-routes(app);
+// routes(app);
 
 // async function throwsError() {
 //   throw new Error("Boom!");
@@ -93,7 +103,3 @@ routes(app);
 //     res.status(400).send("something aint right homie");
 //   }
 // });
-
-app.listen(4000, () => {
-  console.log("application listening at http://localhost:4000");
-});

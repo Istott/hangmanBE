@@ -13,6 +13,13 @@ app.use(cors());
 
 const users: Array<{ id: number; username: string; password: string }> = [];
 
+app.get("/", (req: Request, res: Response) => {
+  return res.json({
+    success: true,
+    name: "Isaac The Fullstack dev",
+  });
+});
+
 app.post("/api/login", (req: Request, res: Response) => {
   const { username, password } = req.body;
   console.log(users);
