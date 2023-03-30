@@ -1,2 +1,2 @@
 # hangmanBE
-backend for hangman speed app
+merged backend with client repo. This repo is no longer in use.
